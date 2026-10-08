@@ -2,6 +2,8 @@
 
 **Fixes for abandoned packages: npm, Go, GitHub Actions and PyPI.**
 
+**Website: [fitzyracing1.github.io/360-bench](https://fitzyracing1.github.io/360-bench/)**
+
 Some of the most-used packages and actions haven't shipped in years, while real crash reports and fix PRs sit unmerged. 360 Bench takes them, fixes the confirmed bugs with tests, and republishes them as drop-in replacements: `@fitzyracing/*` on npm, `fitzyracing1/*` on GitHub (Go modules and Actions) and `fitzyracing-*` on PyPI. The API stays the same, and every original author is credited.
 
 ## The forks
@@ -103,7 +105,7 @@ override-dependencies = ["pydub; sys_platform == 'never'"]
 
 ## Suggest a package
 
-Know a widely used package or action that's abandoned and still crashing? [Open an issue](https://github.com/fitzyracing1/360-bench/issues/new) with the package name, the bug and the upstream issue link.
+Know a widely used package or action that's abandoned and still crashing? [Submit it on the website](https://fitzyracing1.github.io/360-bench/#submit): the form sends it by email or as a public GitHub issue. You can also [open an issue](https://github.com/fitzyracing1/360-bench/issues/new?template=submit-project.yml) directly.
 
 ## License
 

@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>360 Bench: tested fixes for abandoned open-source packages</title>
+  <meta name="description" content="360 Bench takes popular abandoned packages and actions (npm, Go, GitHub Actions, PyPI), fixes confirmed bugs with tests, and republishes them as drop-in replacements. Same API, credit kept.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="360 Bench">
+  <meta property="og:description" content="Tested, minimal, no-surprise fixes for popular abandoned open-source packages.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="brand" href="#top" aria-label="360 Bench, back to top">
+        <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="20" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="3 3.28"/>
+          <path d="M32 6a26 26 0 1 1-24.3 16.8" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="32" cy="32" r="6" fill="var(--accent)"/>
+        </svg>
+        <span class="brand__name">360&nbsp;Bench</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a class="nav-cta" href="#submit">Submit<span class="nav-cta__long"> a project</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow"><span class="dot dot--live" aria-hidden="true"></span> npm · Go · GitHub Actions · PyPI</p>
+          <h1 id="hero-title">Fixes for the abandoned packages you still&nbsp;depend&nbsp;on.</h1>
+          <p class="hero__promise">One confirmed bug. A test that fails on the original. A minimal fix. The same API. <strong>No surprises.</strong></p>
+          <p class="hero__lede">Some of the most-used packages and actions haven&rsquo;t shipped in years, while real crash reports and fix PRs sit unmerged. 360 Bench takes them, fixes the confirmed bugs with tests, and republishes them as drop-in replacements: <code>@fitzyracing/*</code> on npm, <code>fitzyracing1/*</code> on GitHub (Go modules and Actions) and <code>fitzyracing-*</code> on PyPI. Every original author is credited.</p>
+          <div class="hero__ctas">
+            <a class="btn btn--primary" href="#projects">Browse the forks <span aria-hidden="true">→</span></a>
+            <a class="btn btn--ghost" href="#submit">Submit an abandoned project</a>
+          </div>
+          <ul class="stats" aria-label="At a glance">
+            <li><strong data-stat="forks">8</strong><span>drop-in forks</span></li>
+            <li><strong data-stat="ecosystems">4</strong><span>ecosystems</span></li>
+            <li><strong>1</strong><span>failing test per fix, minimum</span></li>
+            <li><strong>0</strong><span>package names taken</span></li>
+          </ul>
+        </div>
+        <div class="hero__visual">
+          <div class="dial" role="group" aria-label="Every fork on the bench. Each marker links to its project card.">
+            <div class="dial__ticks" aria-hidden="true"></div>
+            <div class="dial__sweep" aria-hidden="true"></div>
+            <div class="dial__face" aria-hidden="true">
+              <span class="dial__deg">360<sup>°</sup></span>
+              <span class="dial__label">bench</span>
+            </div>
+            <div class="dial__dots" id="dial-dots"><!-- DIAL:START --><a class="dial__dot dot--npm" style="--a:0deg" href="#p-fast-deep-equal" title="@fitzyracing/fast-deep-equal"><span class="visually-hidden">@fitzyracing/fast-deep-equal (npm)</span></a><a class="dial__dot dot--npm" style="--a:45deg" href="#p-progress" title="@fitzyracing/progress"><span class="visually-hidden">@fitzyracing/progress (npm)</span></a><a class="dial__dot dot--npm" style="--a:90deg" href="#p-react-transition-group" title="@fitzyracing/react-transition-group"><span class="visually-hidden">@fitzyracing/react-transition-group (npm)</span></a><a class="dial__dot dot--go" style="--a:135deg" href="#p-cron" title="github.com/fitzyracing1/cron/v3"><span class="visually-hidden">github.com/fitzyracing1/cron/v3 (Go)</span></a><a class="dial__dot dot--actions" style="--a:180deg" href="#p-action-add-labels" title="360 Bench Add Labels"><span class="visually-hidden">360 Bench Add Labels (GitHub Actions)</span></a><a class="dial__dot dot--actions" style="--a:225deg" href="#p-action-remove-labels" title="360 Bench Remove Labels"><span class="visually-hidden">360 Bench Remove Labels (GitHub Actions)</span></a><a class="dial__dot dot--pypi" style="--a:270deg" href="#p-pydub" title="fitzyracing-pydub"><span class="visually-hidden">fitzyracing-pydub (PyPI)</span></a><a class="dial__dot dot--pypi" style="--a:315deg" href="#p-fs" title="fitzyracing-fs"><span class="visually-hidden">fitzyracing-fs (PyPI)</span></a><!-- DIAL:END --></div>
+          </div>
+          <p class="hero__name"><span class="k">Why &ldquo;360&rdquo;?</span> Fixes for <em>all</em> abandoned projects, all the way around.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section how" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="kicker">How it works</p>
+          <h2 id="how-title">From abandoned to fixed, without changing your code.</h2>
+        </header>
+        <ol class="steps">
+          <li class="step">
+            <span class="step__n" aria-hidden="true">01</span>
+            <h3>Spot</h3>
+            <p>A widely used package or action hasn&rsquo;t shipped in years while real crash reports and fix PRs sit unmerged upstream.</p>
+          </li>
+          <li class="step">
+            <span class="step__n" aria-hidden="true">02</span>
+            <h3>Prove</h3>
+            <p>The bug is confirmed and linked to an upstream issue, then captured in a test that <strong>fails on the original</strong>.</p>
+          </li>
+          <li class="step">
+            <span class="step__n" aria-hidden="true">03</span>
+            <h3>Fix &amp; republish</h3>
+            <p>The smallest fix that makes the test <strong>pass</strong>, published as a drop-in fork under a fitzyracing name, with the same API.</p>
+          </li>
+          <li class="step">
+            <span class="step__n" aria-hidden="true">04</span>
+            <h3>Point home</h3>
+            <p>If a maintainer comes back and ships the fix, the fork points people back upstream, happy to hand it all back.</p>
+          </li>
+        </ol>
+
+        <div class="rules" aria-labelledby="rules-title">
+          <h3 class="rules__title" id="rules-title"><span class="kicker">The rules</span> Four promises, every fork.</h3>
+          <ul class="rules__list">
+            <li>
+              <h4><span class="rule__icon" aria-hidden="true">✓</span> Only confirmed bugs.</h4>
+              <p>Every fix links to an upstream issue and ships with a test that fails on the original and passes on the fork.</p>
+            </li>
+            <li>
+              <h4><span class="rule__icon" aria-hidden="true">=</span> No surprises.</h4>
+              <p>Same API, same output wherever the original didn&rsquo;t crash. No new dependencies beyond what a fix needs (for example <code>audioop-lts</code> on Python 3.13+). Anything else that changes, such as published upstream <code>master</code> commits, is listed in the fork&rsquo;s README.</p>
+            </li>
+            <li>
+              <h4><span class="rule__icon" aria-hidden="true">©</span> Credit stays.</h4>
+              <p>The original LICENSE, author and contributors are kept.</p>
+            </li>
+            <li>
+              <h4><span class="rule__icon" aria-hidden="true">↩</span> Upstream first.</h4>
+              <p>If a maintainer comes back and ships the fix, the fork points people home. 360 Bench is happy to hand it back.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section projects" id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <header class="section__head section__head--row">
+          <div>
+            <p class="kicker">On the bench</p>
+            <h2 id="projects-title">The forks</h2>
+            <p class="section__sub">Each one replaces an upstream project and fixes only what&rsquo;s listed. Copy the swap-in snippet and you&rsquo;re done. Full details are in the <a href="https://github.com/fitzyracing1/360-bench#readme" rel="noopener" target="_blank">360 Bench README<span class="visually-hidden"> (opens in a new tab)</span></a>.</p>
+          </div>
+          <div class="filters" id="filters" role="group" aria-label="Filter projects by ecosystem" hidden></div>
+        </header>
+        <p class="visually-hidden" id="filter-status" role="status" aria-live="polite"></p>
+        <div id="projects-list" class="projects__list"><!-- PROJECTS:START --><section class="eco" data-eco="npm" aria-labelledby="eco-npm"><div class="eco__head"><h3 id="eco-npm"><span class="chip chip--npm">npm</span><span class="eco__count">3 forks</span></h3><p class="eco__blurb">Install one directly, or fix it everywhere in your dependency tree (for example inside ajv, eslint, Material-UI or react-bootstrap) without touching your code, using npm 9.9+ <code>overrides</code> in your <code>package.json</code>. Yarn uses <code>&quot;resolutions&quot;</code>, pnpm uses <code>&quot;pnpm&quot;: { &quot;overrides&quot;: { ... } }</code>.</p></div><div class="cards"><article class="card" data-eco="npm" id="p-fast-deep-equal" aria-labelledby="p-fast-deep-equal-title"><div class="card__top"><span class="chip chip--npm">npm</span><span class="card__ver" title="Current fork version">3.1.4</span></div><h4 class="card__name card__name--mono" id="p-fast-deep-equal-title"><span class="ns">@fitzyracing/</span>fast-deep-equal</h4><p class="card__replaces"><span class="k">Replaces</span> <a class="upstream" href="https://github.com/epoberezkin/fast-deep-equal" rel="noopener" target="_blank"><code>fast-deep-equal</code><svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p><dl class="card__meta"><div><dt>Upstream last release</dt><dd>3.1.3, June 2020</dd></div><div><dt>Upstream usage</dt><dd>~265M/week</dd></div><div><dt>License</dt><dd>MIT</dd></div></dl><div class="card__fixed"><h5>What&rsquo;s fixed</h5><p>No more <code>a.valueOf is not a function</code> crash on <code>Object.create(null)</code> objects or on data with a <code>toString</code>/<code>valueOf</code> field. Invalid Dates now compare equal. Ships TypeScript types.</p></div><div class="snip snip--multi"><div class="snip__tabs" role="tablist" aria-label="Swap-in options for @fitzyracing/fast-deep-equal"><button type="button" role="tab" class="snip__tab" id="snip-fast-deep-equal-tab-0" aria-controls="snip-fast-deep-equal-panel-0" aria-selected="true" tabindex="0">package.json overrides</button><button type="button" role="tab" class="snip__tab" id="snip-fast-deep-equal-tab-1" aria-controls="snip-fast-deep-equal-panel-1" aria-selected="false" tabindex="-1">Install directly</button></div><div class="snip__panel" id="snip-fast-deep-equal-panel-0" role="tabpanel" aria-labelledby="snip-fast-deep-equal-tab-0"><div class="snip__bar"><span class="snip__label">package.json overrides</span><button type="button" class="copy" data-copy="&quot;overrides&quot;: {
+  &quot;fast-deep-equal&quot;: &quot;npm:@fitzyracing/fast-deep-equal@^3.1.4&quot;
+}" aria-label="Copy package.json overrides snippet for @fitzyracing/fast-deep-equal"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="package.json overrides code"><code class="lang-json"><span class="ln">&quot;overrides&quot;: {</span>
+<span class="ln">  &quot;fast-deep-equal&quot;: &quot;npm:@fitzyracing/fast-deep-equal@^3.1.4&quot;</span>
+<span class="ln">}</span></code></pre></div><div class="snip__panel" id="snip-fast-deep-equal-panel-1" role="tabpanel" aria-labelledby="snip-fast-deep-equal-tab-1"><div class="snip__bar"><span class="snip__label">Install directly</span><button type="button" class="copy" data-copy="npm i @fitzyracing/fast-deep-equal" aria-label="Copy Install directly snippet for @fitzyracing/fast-deep-equal"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="Install directly code"><code class="lang-sh"><span class="ln">npm i @fitzyracing/fast-deep-equal</span></code></pre></div></div><p class="card__links"><a class="btn-link" href="https://github.com/fitzyracing1/fast-deep-equal" rel="noopener" target="_blank">Repo<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://www.npmjs.com/package/@fitzyracing/fast-deep-equal" rel="noopener" target="_blank">npm<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://github.com/epoberezkin/fast-deep-equal" rel="noopener" target="_blank">Upstream<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></article><article class="card" data-eco="npm" id="p-progress" aria-labelledby="p-progress-title"><div class="card__top"><span class="chip chip--npm">npm</span><span class="card__ver" title="Current fork version">2.0.4</span></div><h4 class="card__name card__name--mono" id="p-progress-title"><span class="ns">@fitzyracing/</span>progress</h4><p class="card__replaces"><span class="k">Replaces</span> <a class="upstream" href="https://github.com/visionmedia/node-progress" rel="noopener" target="_blank"><code>progress</code><svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p><dl class="card__meta"><div><dt>Upstream last release</dt><dd>2.0.3, Dec 2018</dd></div><div><dt>Upstream usage</dt><dd>~69M/week</dd></div><div><dt>License</dt><dd>MIT</dd></div></dl><div class="card__fixed"><h5>What&rsquo;s fixed</h5><p>No more <code>RangeError: Invalid array length</code> on NaN or missing content-length totals and on streams without <code>columns</code>. Handles a non-numeric <code>width</code>, and <code>interrupt()</code> works on piped output.</p></div><div class="snip snip--multi"><div class="snip__tabs" role="tablist" aria-label="Swap-in options for @fitzyracing/progress"><button type="button" role="tab" class="snip__tab" id="snip-progress-tab-0" aria-controls="snip-progress-panel-0" aria-selected="true" tabindex="0">package.json overrides</button><button type="button" role="tab" class="snip__tab" id="snip-progress-tab-1" aria-controls="snip-progress-panel-1" aria-selected="false" tabindex="-1">Install directly</button></div><div class="snip__panel" id="snip-progress-panel-0" role="tabpanel" aria-labelledby="snip-progress-tab-0"><div class="snip__bar"><span class="snip__label">package.json overrides</span><button type="button" class="copy" data-copy="&quot;overrides&quot;: {
+  &quot;progress&quot;: &quot;npm:@fitzyracing/progress@^2.0.4&quot;
+}" aria-label="Copy package.json overrides snippet for @fitzyracing/progress"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="package.json overrides code"><code class="lang-json"><span class="ln">&quot;overrides&quot;: {</span>
+<span class="ln">  &quot;progress&quot;: &quot;npm:@fitzyracing/progress@^2.0.4&quot;</span>
+<span class="ln">}</span></code></pre></div><div class="snip__panel" id="snip-progress-panel-1" role="tabpanel" aria-labelledby="snip-progress-tab-1"><div class="snip__bar"><span class="snip__label">Install directly</span><button type="button" class="copy" data-copy="npm i @fitzyracing/progress" aria-label="Copy Install directly snippet for @fitzyracing/progress"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="Install directly code"><code class="lang-sh"><span class="ln">npm i @fitzyracing/progress</span></code></pre></div></div><p class="card__links"><a class="btn-link" href="https://github.com/fitzyracing1/progress" rel="noopener" target="_blank">Repo<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://www.npmjs.com/package/@fitzyracing/progress" rel="noopener" target="_blank">npm<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://github.com/visionmedia/node-progress" rel="noopener" target="_blank">Upstream<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></article><article class="card" data-eco="npm" id="p-react-transition-group" aria-labelledby="p-react-transition-group-title"><div class="card__top"><span class="chip chip--npm">npm</span><span class="card__ver" title="Current fork version">4.4.6</span></div><h4 class="card__name card__name--mono" id="p-react-transition-group-title"><span class="ns">@fitzyracing/</span>react-transition-group</h4><p class="card__replaces"><span class="k">Replaces</span> <a class="upstream" href="https://github.com/reactjs/react-transition-group" rel="noopener" target="_blank"><code>react-transition-group</code><svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p><dl class="card__meta"><div><dt>Upstream last release</dt><dd>4.4.5, Aug 2022</dd></div><div><dt>Upstream usage</dt><dd>~66M/week</dd></div><div><dt>License</dt><dd>BSD-3-Clause</dd></div></dl><div class="card__fixed"><h5>What&rsquo;s fixed</h5><p>No more <code>TypeError: findDOMNode is not a function</code> on React 19 when no <code>nodeRef</code> is passed (<code>Transition</code>, <code>CSSTransition</code>, <code>SwitchTransition</code>, <code>TransitionGroup</code>, <code>ReplaceTransition</code>). React 16.6 to 18 behave exactly as 4.4.5.</p><p class="card__refs"><span class="k">Upstream refs</span> <a class="ref" href="https://github.com/reactjs/react-transition-group/issues/918" rel="noopener" target="_blank">#918<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p><p class="card__note"><span class="k">Note</span> On React 19 without <code>nodeRef</code>, the child of a transition has to accept a <code>ref</code> (a DOM element, a <code>forwardRef</code> component, or a function component that passes <code>ref</code> on). <a class="" href="https://github.com/fitzyracing1/react-transition-group#on-react-19-the-child-has-to-accept-a-ref" rel="noopener" target="_blank">Details<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></div><div class="snip snip--multi"><div class="snip__tabs" role="tablist" aria-label="Swap-in options for @fitzyracing/react-transition-group"><button type="button" role="tab" class="snip__tab" id="snip-react-transition-group-tab-0" aria-controls="snip-react-transition-group-panel-0" aria-selected="true" tabindex="0">package.json overrides</button><button type="button" role="tab" class="snip__tab" id="snip-react-transition-group-tab-1" aria-controls="snip-react-transition-group-panel-1" aria-selected="false" tabindex="-1">Install directly</button></div><div class="snip__panel" id="snip-react-transition-group-panel-0" role="tabpanel" aria-labelledby="snip-react-transition-group-tab-0"><div class="snip__bar"><span class="snip__label">package.json overrides</span><button type="button" class="copy" data-copy="&quot;overrides&quot;: {
+  &quot;react-transition-group&quot;: &quot;npm:@fitzyracing/react-transition-group@^4.4.6&quot;
+}" aria-label="Copy package.json overrides snippet for @fitzyracing/react-transition-group"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="package.json overrides code"><code class="lang-json"><span class="ln">&quot;overrides&quot;: {</span>
+<span class="ln">  &quot;react-transition-group&quot;: &quot;npm:@fitzyracing/react-transition-group@^4.4.6&quot;</span>
+<span class="ln">}</span></code></pre></div><div class="snip__panel" id="snip-react-transition-group-panel-1" role="tabpanel" aria-labelledby="snip-react-transition-group-tab-1"><div class="snip__bar"><span class="snip__label">Install directly</span><button type="button" class="copy" data-copy="npm i @fitzyracing/react-transition-group" aria-label="Copy Install directly snippet for @fitzyracing/react-transition-group"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="Install directly code"><code class="lang-sh"><span class="ln">npm i @fitzyracing/react-transition-group</span></code></pre></div></div><p class="card__links"><a class="btn-link" href="https://github.com/fitzyracing1/react-transition-group" rel="noopener" target="_blank">Repo<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://www.npmjs.com/package/@fitzyracing/react-transition-group" rel="noopener" target="_blank">npm<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://github.com/reactjs/react-transition-group" rel="noopener" target="_blank">Upstream<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></article></div></section><section class="eco" data-eco="go" aria-labelledby="eco-go"><div class="eco__head"><h3 id="eco-go"><span class="chip chip--go">Go</span><span class="eco__count">1 fork</span></h3><p class="eco__blurb">Keep your imports (and fix it for dependencies that import the original too) with a <code>replace</code> in your <code>go.mod</code>, or switch your imports to the fork.</p></div><div class="cards"><article class="card" data-eco="go" id="p-cron" aria-labelledby="p-cron-title"><div class="card__top"><span class="chip chip--go">Go</span><span class="card__ver" title="Current fork version">v3.0.2</span></div><h4 class="card__name card__name--mono" id="p-cron-title"><span class="ns">github.com/fitzyracing1/</span>cron/v3</h4><p class="card__replaces"><span class="k">Replaces</span> <a class="upstream" href="https://github.com/robfig/cron" rel="noopener" target="_blank"><code>github.com/robfig/cron/v3</code><svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p><dl class="card__meta"><div><dt>Upstream last release</dt><dd>v3.0.1, Jan 2020</dd></div><div><dt>Upstream usage</dt><dd>imported by ~5.6k modules</dd></div><div><dt>License</dt><dd>MIT</dd></div></dl><div class="card__fixed"><h5>What&rsquo;s fixed</h5><p>No more <code>panic: runtime error: slice bounds out of range [:-1]</code> when a spec is only a timezone prefix (<code>cron.ParseStandard(&quot;TZ=0&quot;)</code>, <code>&quot;CRON_TZ=Asia/Tokyo&quot;</code>, ...): these now return an error. It is v3.0.1 plus this fix only; every spec that parsed before parses the same way.</p><p class="card__refs"><span class="k">Upstream refs</span> <a class="ref" href="https://github.com/robfig/cron/issues/554" rel="noopener" target="_blank">#554<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a> <a class="ref" href="https://github.com/robfig/cron/issues/470" rel="noopener" target="_blank">#470<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></div><div class="snip snip--multi"><div class="snip__tabs" role="tablist" aria-label="Swap-in options for github.com/fitzyracing1/cron/v3"><button type="button" role="tab" class="snip__tab" id="snip-cron-tab-0" aria-controls="snip-cron-panel-0" aria-selected="true" tabindex="0">go.mod replace</button><button type="button" role="tab" class="snip__tab" id="snip-cron-tab-1" aria-controls="snip-cron-panel-1" aria-selected="false" tabindex="-1">Switch imports</button></div><div class="snip__panel" id="snip-cron-panel-0" role="tabpanel" aria-labelledby="snip-cron-tab-0"><div class="snip__bar"><span class="snip__label">go.mod replace</span><button type="button" class="copy" data-copy="replace github.com/robfig/cron/v3 =&gt; github.com/fitzyracing1/cron/v3 v3.0.2" aria-label="Copy go.mod replace snippet for github.com/fitzyracing1/cron/v3"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="go.mod replace code"><code class="lang-go"><span class="ln">replace github.com/robfig/cron/v3 =&gt; github.com/fitzyracing1/cron/v3 v3.0.2</span></code></pre></div><div class="snip__panel" id="snip-cron-panel-1" role="tabpanel" aria-labelledby="snip-cron-tab-1"><div class="snip__bar"><span class="snip__label">Switch imports</span><button type="button" class="copy" data-copy="go get github.com/fitzyracing1/cron/v3@v3.0.2" aria-label="Copy Switch imports snippet for github.com/fitzyracing1/cron/v3"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="Switch imports code"><code class="lang-sh"><span class="ln">go get github.com/fitzyracing1/cron/v3@v3.0.2</span></code></pre></div></div><p class="card__links"><a class="btn-link" href="https://github.com/fitzyracing1/cron" rel="noopener" target="_blank">Repo<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://pkg.go.dev/github.com/fitzyracing1/cron/v3" rel="noopener" target="_blank">pkg.go.dev<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://github.com/robfig/cron" rel="noopener" target="_blank">Upstream<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></article></div></section><section class="eco" data-eco="actions" aria-labelledby="eco-actions"><div class="eco__head"><h3 id="eco-actions"><span class="chip chip--actions">GitHub Actions</span><span class="eco__count">2 forks</span></h3><p class="eco__blurb">Same inputs, no outputs, same API calls. Change only the <code>uses:</code> line. For the strictest setup, pin the full commit SHA of the release instead of <code>@v1</code>.</p></div><div class="cards"><article class="card" data-eco="actions" id="p-action-add-labels" aria-labelledby="p-action-add-labels-title"><div class="card__top"><span class="chip chip--actions">GitHub Actions</span><span class="card__ver" title="Current fork version">v1.1.4</span></div><h4 class="card__name" id="p-action-add-labels-title">360 Bench Add Labels</h4><p class="card__pkg"><code>fitzyracing1/action-add-labels@v1</code></p><p class="card__replaces"><span class="k">Replaces</span> <a class="upstream" href="https://github.com/actions-ecosystem/action-add-labels" rel="noopener" target="_blank"><code>actions-ecosystem/action-add-labels</code><svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p><dl class="card__meta"><div><dt>Upstream last release</dt><dd>v1.1.3, Aug 2021</dd></div><div><dt>Upstream usage</dt><dd>~15.6k dependent repos</dd></div><div><dt>License</dt><dd>Apache-2.0</dd></div></dl><div class="card__fixed"><h5>What&rsquo;s fixed</h5><p>Declares <code>using: node24</code> instead of <code>node12</code>, so runs no longer get the forced-runtime deprecation warning now that GitHub removed Node 20. Current <code>@actions/core</code>/<code>@actions/github</code> with no Node deprecation warnings. Follows <code>GITHUB_API_URL</code>, so it works on GitHub Enterprise Server.</p><p class="card__refs"><span class="k">Upstream refs</span> <a class="ref" href="https://github.com/actions-ecosystem/action-add-labels/issues/459" rel="noopener" target="_blank">#459<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a> <a class="ref" href="https://github.com/actions-ecosystem/action-add-labels/issues/483" rel="noopener" target="_blank">#483<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a> <a class="ref" href="https://github.blog/changelog/2026-09-23-node-20-is-no-longer-available-in-github-actions/" rel="noopener" target="_blank">Node 20 removal (GitHub changelog)<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></div><div class="snip"><div class="snip__panel" id="snip-action-add-labels-panel-0"><div class="snip__bar"><span class="snip__label">workflow uses:</span><button type="button" class="copy" data-copy="- uses: fitzyracing1/action-add-labels@v1" aria-label="Copy workflow uses: snippet for fitzyracing1/action-add-labels@v1"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="workflow uses: code"><code class="lang-diff"><span class="ln ln--del">-      - uses: actions-ecosystem/action-add-labels@v1</span>
+<span class="ln ln--add">+      - uses: fitzyracing1/action-add-labels@v1</span></code></pre></div></div><p class="card__links"><a class="btn-link" href="https://github.com/fitzyracing1/action-add-labels" rel="noopener" target="_blank">Repo<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://github.com/marketplace/actions/360-bench-add-labels" rel="noopener" target="_blank">Marketplace<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://github.com/actions-ecosystem/action-add-labels" rel="noopener" target="_blank">Upstream<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></article><article class="card" data-eco="actions" id="p-action-remove-labels" aria-labelledby="p-action-remove-labels-title"><div class="card__top"><span class="chip chip--actions">GitHub Actions</span><span class="card__ver" title="Current fork version">v1.3.1</span></div><h4 class="card__name" id="p-action-remove-labels-title">360 Bench Remove Labels</h4><p class="card__pkg"><code>fitzyracing1/action-remove-labels@v1</code></p><p class="card__replaces"><span class="k">Replaces</span> <a class="upstream" href="https://github.com/actions-ecosystem/action-remove-labels" rel="noopener" target="_blank"><code>actions-ecosystem/action-remove-labels</code><svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p><dl class="card__meta"><div><dt>Upstream last release</dt><dd>v1.3.0, Sep 2021</dd></div><div><dt>Upstream usage</dt><dd>~10.7k dependent repos</dd></div><div><dt>License</dt><dd>Apache-2.0</dd></div></dl><div class="card__fixed"><h5>What&rsquo;s fixed</h5><p>Declares <code>using: node24</code> instead of <code>node12</code>. Current <code>@actions/core</code>/<code>@actions/github</code> with no Node deprecation warnings.</p><p class="card__refs"><span class="k">Upstream refs</span> <a class="ref" href="https://github.com/actions-ecosystem/action-remove-labels/issues/413" rel="noopener" target="_blank">#413<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></div><div class="snip"><div class="snip__panel" id="snip-action-remove-labels-panel-0"><div class="snip__bar"><span class="snip__label">workflow uses:</span><button type="button" class="copy" data-copy="- uses: fitzyracing1/action-remove-labels@v1" aria-label="Copy workflow uses: snippet for fitzyracing1/action-remove-labels@v1"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="workflow uses: code"><code class="lang-diff"><span class="ln ln--del">-      - uses: actions-ecosystem/action-remove-labels@v1</span>
+<span class="ln ln--add">+      - uses: fitzyracing1/action-remove-labels@v1</span></code></pre></div></div><p class="card__links"><a class="btn-link" href="https://github.com/fitzyracing1/action-remove-labels" rel="noopener" target="_blank">Repo<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://github.com/marketplace/actions/360-bench-remove-labels" rel="noopener" target="_blank">Marketplace<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://github.com/actions-ecosystem/action-remove-labels" rel="noopener" target="_blank">Upstream<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></article></div></section><section class="eco" data-eco="pypi" aria-labelledby="eco-pypi"><div class="eco__head"><h3 id="eco-pypi"><span class="chip chip--pypi">PyPI</span><span class="eco__count">2 forks</span></h3><p class="eco__blurb">The import name is unchanged, so your code stays the same. Uninstall the original first, then install the fork (the order matters, because both own the same files). pip can&#39;t swap a dependency for a differently named package; if another package pulls in the original, uv can drop it with an override.</p></div><div class="cards"><article class="card" data-eco="pypi" id="p-pydub" aria-labelledby="p-pydub-title"><div class="card__top"><span class="chip chip--pypi">PyPI</span><span class="card__ver" title="Current fork version">0.25.2</span></div><h4 class="card__name card__name--mono" id="p-pydub-title"><span class="ns">fitzyracing-</span>pydub</h4><p class="card__pkg">import name <code>pydub</code></p><p class="card__replaces"><span class="k">Replaces</span> <a class="upstream" href="https://github.com/jiaaro/pydub" rel="noopener" target="_blank"><code>pydub</code><svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p><dl class="card__meta"><div><dt>Upstream last release</dt><dd>0.25.1, Mar 2021</dd></div><div><dt>Upstream usage</dt><dd>~17.8M/month</dd></div><div><dt>License</dt><dd>MIT</dd></div></dl><div class="card__fixed"><h5>What&rsquo;s fixed</h5><p>No more <code>ModuleNotFoundError: No module named &#39;pyaudioop&#39;</code> on <code>from pydub import AudioSegment</code> on Python 3.13+ (depends on <code>audioop-lts</code> there only, with a working Python 3 fallback). No <code>SyntaxWarning: invalid escape sequence</code>. Built from upstream <code>master</code>, so it also ships the maintainer&#39;s merged but unreleased fixes. Python 3.9+.</p><p class="card__refs"><span class="k">Upstream refs</span> <a class="ref" href="https://github.com/jiaaro/pydub/issues/725" rel="noopener" target="_blank">#725<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a> <a class="ref" href="https://github.com/jiaaro/pydub/issues/839" rel="noopener" target="_blank">#839<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a> <a class="ref" href="https://github.com/jiaaro/pydub/issues/863" rel="noopener" target="_blank">#863<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a> <a class="ref" href="https://github.com/jiaaro/pydub/issues/867" rel="noopener" target="_blank">#867<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a> <a class="ref" href="https://github.com/jiaaro/pydub/issues/801" rel="noopener" target="_blank">#801<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></div><div class="snip snip--multi"><div class="snip__tabs" role="tablist" aria-label="Swap-in options for fitzyracing-pydub"><button type="button" role="tab" class="snip__tab" id="snip-pydub-tab-0" aria-controls="snip-pydub-panel-0" aria-selected="true" tabindex="0">pip (uninstall first)</button><button type="button" role="tab" class="snip__tab" id="snip-pydub-tab-1" aria-controls="snip-pydub-panel-1" aria-selected="false" tabindex="-1">uv override</button></div><div class="snip__panel" id="snip-pydub-panel-0" role="tabpanel" aria-labelledby="snip-pydub-tab-0"><div class="snip__bar"><span class="snip__label">pip (uninstall first)</span><button type="button" class="copy" data-copy="pip uninstall -y pydub &amp;&amp; pip install fitzyracing-pydub" aria-label="Copy pip (uninstall first) snippet for fitzyracing-pydub"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="pip (uninstall first) code"><code class="lang-sh"><span class="ln">pip uninstall -y pydub &amp;&amp; pip install fitzyracing-pydub</span></code></pre></div><div class="snip__panel" id="snip-pydub-panel-1" role="tabpanel" aria-labelledby="snip-pydub-tab-1"><div class="snip__bar"><span class="snip__label">uv override</span><button type="button" class="copy" data-copy="[project]
+dependencies = [&quot;fitzyracing-pydub&quot;, &quot;...the package that depends on pydub...&quot;]
+
+[tool.uv]
+override-dependencies = [&quot;pydub; sys_platform == &#39;never&#39;&quot;]" aria-label="Copy uv override snippet for fitzyracing-pydub"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="uv override code"><code class="lang-toml"><span class="ln">[project]</span>
+<span class="ln">dependencies = [&quot;fitzyracing-pydub&quot;, &quot;...the package that depends on pydub...&quot;]</span>
+<span class="ln"></span>
+<span class="ln">[tool.uv]</span>
+<span class="ln">override-dependencies = [&quot;pydub; sys_platform == &#39;never&#39;&quot;]</span></code></pre></div></div><p class="card__links"><a class="btn-link" href="https://github.com/fitzyracing1/pydub" rel="noopener" target="_blank">Repo<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://pypi.org/project/fitzyracing-pydub/" rel="noopener" target="_blank">PyPI<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://github.com/jiaaro/pydub" rel="noopener" target="_blank">Upstream<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></article><article class="card" data-eco="pypi" id="p-fs" aria-labelledby="p-fs-title"><div class="card__top"><span class="chip chip--pypi">PyPI</span><span class="card__ver" title="Current fork version">2.4.18</span></div><h4 class="card__name card__name--mono" id="p-fs-title"><span class="ns">fitzyracing-</span>fs</h4><p class="card__pkg">import name <code>fs</code></p><p class="card__replaces"><span class="k">Replaces</span> <a class="upstream" href="https://github.com/PyFilesystem/pyfilesystem2" rel="noopener" target="_blank"><code>fs (PyFilesystem2)</code><svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p><dl class="card__meta"><div><dt>Upstream last release</dt><dd>2.4.16, May 2022</dd></div><div><dt>Upstream usage</dt><dd>~1.5M/month</dd></div><div><dt>License</dt><dd>MIT</dd></div></dl><div class="card__fixed"><h5>What&rsquo;s fixed</h5><p><code>import fs</code> no longer fails with <code>ModuleNotFoundError: No module named &#39;pkg_resources&#39;</code> on setuptools 82+: no <code>pkg_resources</code> or <code>setuptools</code> needed, and <code>fs.*</code> extensions and <code>fs.opener</code> plugins are still found. <code>geturl(..., purpose=&quot;fs&quot;)</code> returns <code>osfs:///tmp/x</code> on Python 3.14, as on earlier versions. Python 3.9+.</p><p class="card__refs"><span class="k">Upstream refs</span> <a class="ref" href="https://github.com/PyFilesystem/pyfilesystem2/issues/577" rel="noopener" target="_blank">#577<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a> <a class="ref" href="https://github.com/PyFilesystem/pyfilesystem2/issues/597" rel="noopener" target="_blank">#597<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></div><div class="snip snip--multi"><div class="snip__tabs" role="tablist" aria-label="Swap-in options for fitzyracing-fs"><button type="button" role="tab" class="snip__tab" id="snip-fs-tab-0" aria-controls="snip-fs-panel-0" aria-selected="true" tabindex="0">pip (uninstall first)</button><button type="button" role="tab" class="snip__tab" id="snip-fs-tab-1" aria-controls="snip-fs-panel-1" aria-selected="false" tabindex="-1">uv override</button></div><div class="snip__panel" id="snip-fs-panel-0" role="tabpanel" aria-labelledby="snip-fs-tab-0"><div class="snip__bar"><span class="snip__label">pip (uninstall first)</span><button type="button" class="copy" data-copy="pip uninstall -y fs &amp;&amp; pip install fitzyracing-fs" aria-label="Copy pip (uninstall first) snippet for fitzyracing-fs"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="pip (uninstall first) code"><code class="lang-sh"><span class="ln">pip uninstall -y fs &amp;&amp; pip install fitzyracing-fs</span></code></pre></div><div class="snip__panel" id="snip-fs-panel-1" role="tabpanel" aria-labelledby="snip-fs-tab-1"><div class="snip__bar"><span class="snip__label">uv override</span><button type="button" class="copy" data-copy="[project]
+dependencies = [&quot;fitzyracing-fs&quot;, &quot;...the package that depends on fs...&quot;]
+
+[tool.uv]
+override-dependencies = [&quot;fs; sys_platform == &#39;never&#39;&quot;]" aria-label="Copy uv override snippet for fitzyracing-fs"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><rect x="5" y="5" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="copy__text">Copy</span></button></div><pre tabindex="0" aria-label="uv override code"><code class="lang-toml"><span class="ln">[project]</span>
+<span class="ln">dependencies = [&quot;fitzyracing-fs&quot;, &quot;...the package that depends on fs...&quot;]</span>
+<span class="ln"></span>
+<span class="ln">[tool.uv]</span>
+<span class="ln">override-dependencies = [&quot;fs; sys_platform == &#39;never&#39;&quot;]</span></code></pre></div></div><p class="card__links"><a class="btn-link" href="https://github.com/fitzyracing1/pyfilesystem2" rel="noopener" target="_blank">Repo<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://pypi.org/project/fitzyracing-fs/" rel="noopener" target="_blank">PyPI<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn-link" href="https://github.com/PyFilesystem/pyfilesystem2" rel="noopener" target="_blank">Upstream<svg class="ext" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></p></article></div></section><!-- PROJECTS:END --></div>
+      </div>
+    </section>
+
+    <!-- SUBMIT -->
+    <section class="section submit" id="submit" aria-labelledby="submit-title">
+      <div class="wrap submit__grid">
+        <aside class="submit__aside">
+          <p class="kicker">Submit a project</p>
+          <h2 id="submit-title">Know an abandoned project that&rsquo;s still crashing?</h2>
+          <p>Original maintainers who&rsquo;ve run out of time, co-maintainers without publish rights, and teams stuck on a broken dependency are all welcome. Tell 360 Bench about it.</p>
+          <ol class="mini-steps">
+            <li><strong>Fill in the form.</strong> It takes about two minutes.</li>
+            <li><strong>Choose how to send it:</strong> privately by email (your email app opens with everything filled in) or as a public GitHub issue.</li>
+            <li><strong>Every submission is read by a person.</strong> If it&rsquo;s a fit, the conversation starts from there.</li>
+          </ol>
+          <div class="callout">
+            <p class="callout__title">This page sends nothing by itself.</p>
+            <p>There&rsquo;s no backend and nothing is stored. Your message only goes out when you press send in your own email app, or submit on GitHub.</p>
+          </div>
+        </aside>
+
+        <div class="submit__formwrap">
+          <noscript>
+            <p class="noscript-note">The form needs JavaScript to prepare your message. Without it, email <a href="mailto:Fitzyracing1@gmail.com?subject=360%20Bench%20submission">Fitzyracing1@gmail.com</a> or <a href="https://github.com/fitzyracing1/360-bench/issues/new">open an issue on GitHub</a> with the project name, repository, what&rsquo;s broken and who depends on it.</p>
+          </noscript>
+          <form id="submit-form" class="form" novalidate action="mailto:Fitzyracing1@gmail.com?subject=360%20Bench%20submission" method="post" enctype="text/plain" aria-describedby="form-required-note">
+            <p class="form__required" id="form-required-note">Fields marked <span class="req" aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+
+            <div class="error-summary" id="error-summary" tabindex="-1" role="alert" hidden>
+              <h3>Please fix the following:</h3>
+              <ul></ul>
+            </div>
+
+            <fieldset class="form__group">
+              <legend><span class="legend__n">1</span> About you</legend>
+              <div class="grid-2">
+                <div class="field">
+                  <label for="f-name">Your name <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="120" aria-describedby="f-name-err">
+                  <p class="field__err" id="f-name-err"></p>
+                </div>
+                <div class="field">
+                  <label for="f-email">Your email <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="f-email-hint f-email-err">
+                  <p class="field__hint" id="f-email-hint">Only included in a public GitHub issue if you choose.</p>
+                  <p class="field__err" id="f-email-err"></p>
+                </div>
+              </div>
+              <fieldset class="field field--choices" id="f-role" aria-describedby="f-role-err">
+                <legend>Your role <span class="req" aria-hidden="true">*</span></legend>
+                <div class="pills">
+                  <label class="pill"><input type="radio" name="role" value="Original maintainer" required><span>Original maintainer</span></label>
+                  <label class="pill"><input type="radio" name="role" value="Co-maintainer"><span>Co-maintainer</span></label>
+                  <label class="pill"><input type="radio" name="role" value="User or company depending on it"><span>User or company depending on it</span></label>
+                  <label class="pill"><input type="radio" name="role" value="Other"><span>Other</span></label>
+                </div>
+                <div class="field field--reveal" id="f-role-other-wrap" hidden>
+                  <label for="f-role-other">Describe your role <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-role-other" name="role_other" type="text" maxlength="200" aria-describedby="f-role-other-err">
+                  <p class="field__err" id="f-role-other-err"></p>
+                </div>
+                <p class="field__err" id="f-role-err"></p>
+              </fieldset>
+            </fieldset>
+
+            <fieldset class="form__group">
+              <legend><span class="legend__n">2</span> The project</legend>
+              <div class="grid-2">
+                <div class="field">
+                  <label for="f-project">Project name <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-project" name="project" type="text" required maxlength="150" placeholder="e.g. left-pad" aria-describedby="f-project-err">
+                  <p class="field__err" id="f-project-err"></p>
+                </div>
+                <div class="field">
+                  <label for="f-repo">Repository URL <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-repo" name="repo" type="url" inputmode="url" required maxlength="300" placeholder="https://github.com/owner/repo" aria-describedby="f-repo-err">
+                  <p class="field__err" id="f-repo-err"></p>
+                </div>
+              </div>
+              <div class="field">
+                <label for="f-registry">Package registry link <span class="opt">(optional)</span></label>
+                <input id="f-registry" name="registry" type="url" inputmode="url" maxlength="300" placeholder="https://www.npmjs.com/package/…, https://pypi.org/project/…" aria-describedby="f-registry-err">
+                <p class="field__err" id="f-registry-err"></p>
+              </div>
+              <fieldset class="field field--choices" id="f-eco" aria-describedby="f-eco-err">
+                <legend>Ecosystem <span class="req" aria-hidden="true">*</span></legend>
+                <div class="pills">
+                  <label class="pill pill--npm"><input type="radio" name="ecosystem" value="npm" required><span>npm</span></label>
+                  <label class="pill pill--pypi"><input type="radio" name="ecosystem" value="PyPI"><span>PyPI</span></label>
+                  <label class="pill pill--go"><input type="radio" name="ecosystem" value="Go"><span>Go</span></label>
+                  <label class="pill pill--actions"><input type="radio" name="ecosystem" value="GitHub Actions"><span>GitHub Actions</span></label>
+                  <label class="pill"><input type="radio" name="ecosystem" value="Other"><span>Other</span></label>
+                </div>
+                <div class="field field--reveal" id="f-eco-other-wrap" hidden>
+                  <label for="f-eco-other">Which ecosystem? <span class="opt">(optional)</span></label>
+                  <input id="f-eco-other" name="ecosystem_other" type="text" maxlength="100" placeholder="e.g. RubyGems, crates.io, Maven">
+                </div>
+                <p class="field__err" id="f-eco-err"></p>
+              </fieldset>
+              <div class="field">
+                <label for="f-broken">What&rsquo;s broken, or why is it abandoned? <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="f-broken" name="broken" rows="5" required maxlength="3000" aria-describedby="f-broken-hint f-broken-err" placeholder="The crash or error, links to upstream issues or unmerged PRs, when it last shipped…"></textarea>
+                <p class="field__hint" id="f-broken-hint">Links to upstream issues and error messages help the most.</p>
+                <p class="field__err" id="f-broken-err"></p>
+              </div>
+              <div class="field">
+                <label for="f-deps">Who depends on it? <span class="opt">(optional)</span></label>
+                <textarea id="f-deps" name="dependents" rows="3" maxlength="1500" aria-describedby="f-deps-hint" placeholder="Weekly downloads, dependent repos, notable packages or companies that use it…"></textarea>
+                <p class="field__hint" id="f-deps-hint">Rough numbers are fine.</p>
+              </div>
+            </fieldset>
+
+            <fieldset class="form__group form__group--partner" aria-describedby="partner-note">
+              <legend><span class="legend__n">3</span> Interested in a partnership? <span class="opt">(optional, pick any)</span></legend>
+              <div class="partner-note" id="partner-note">
+                <p><strong>No fixed terms.</strong> Any equity or partnership terms are agreed project by project, after a conversation. Submitting is not a commitment by either side.</p>
+              </div>
+              <div class="options">
+                <label class="option">
+                  <input type="checkbox" name="partnership" value="Just fix it, no strings">
+                  <span class="option__body"><span class="option__k">a</span><span><strong>Just fix it, no strings.</strong> A tested fork is all that&rsquo;s needed.</span></span>
+                </label>
+                <label class="option">
+                  <input type="checkbox" name="partnership" value="Transfer or share maintainership back after revival">
+                  <span class="option__body"><span class="option__k">b</span><span><strong>Hand it back.</strong> Transfer or share maintainership back after the revival.</span></span>
+                </label>
+                <label class="option">
+                  <input type="checkbox" name="partnership" value="Open to discussing an equity position in exchange for reviving the project">
+                  <span class="option__body"><span class="option__k">c</span><span><strong>Equity conversation.</strong> Open to discussing an equity position in exchange for 360 Bench reviving the project.</span></span>
+                </label>
+                <label class="option">
+                  <input type="checkbox" name="partnership" value="Sponsorship / paid support">
+                  <span class="option__body"><span class="option__k">d</span><span><strong>Sponsorship or paid support.</strong> Fund the revival, or ongoing support.</span></span>
+                </label>
+                <label class="option">
+                  <input type="checkbox" name="partnership" value="Something else" id="p-other">
+                  <span class="option__body"><span class="option__k">e</span><span><strong>Something else.</strong> Describe it below.</span></span>
+                </label>
+              </div>
+              <div class="field field--reveal" id="f-partner-other-wrap" hidden>
+                <label for="f-partner-other">What did you have in mind? <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="f-partner-other" name="partnership_other" rows="3" maxlength="1500" aria-describedby="f-partner-other-err"></textarea>
+                <p class="field__err" id="f-partner-other-err"></p>
+              </div>
+            </fieldset>
+
+            <fieldset class="form__group form__group--send">
+              <legend><span class="legend__n">4</span> Send it</legend>
+              <div class="field field--check">
+                <label class="check">
+                  <input type="checkbox" id="f-consent" name="consent" required aria-describedby="f-consent-err">
+                  <span>I agree that 360 Bench may contact me about this submission. I understand that submitting is not a commitment by either side, and that if I choose the public GitHub option, what I submit there is visible to everyone. <span class="req" aria-hidden="true">*</span></span>
+                </label>
+                <p class="field__err" id="f-consent-err"></p>
+              </div>
+
+              <div class="send">
+                <div class="send__opt send__opt--primary">
+                  <button type="submit" class="btn btn--primary btn--lg" name="via" value="email" id="btn-email">
+                    <svg aria-hidden="true" viewBox="0 0 20 20" width="18" height="18"><rect x="2" y="4" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m3 5 7 6 7-6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                    Compose email
+                  </button>
+                  <p>Private. Opens your email app with a message to <span class="nowrap">Fitzyracing1@gmail.com</span>, ready to send.</p>
+                </div>
+                <div class="send__opt">
+                  <button type="submit" class="btn btn--ghost btn--lg" name="via" value="github" id="btn-github">
+                    <svg aria-hidden="true" viewBox="0 0 16 16" width="18" height="18"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                    Open a public GitHub issue
+                  </button>
+                  <p>Public. Opens a pre-filled issue on <span class="nowrap">fitzyracing1/360-bench</span> that you can edit before submitting.</p>
+                  <label class="check check--small">
+                    <input type="checkbox" id="f-public-email" name="public_email">
+                    <span>Include my email in the public issue</span>
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="result" id="result" tabindex="-1" hidden>
+              <h3 class="result__title" id="result-title"></h3>
+              <p class="result__text" id="result-text"></p>
+              <div class="result__actions">
+                <a class="btn btn--primary" id="result-open" href="#" rel="noopener">Open again</a>
+                <button type="button" class="btn btn--ghost" id="result-copy">Copy message</button>
+              </div>
+              <details class="result__preview">
+                <summary>Preview the message</summary>
+                <pre id="result-body" tabindex="0"></pre>
+              </details>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="wrap faq__grid">
+        <header class="section__head">
+          <p class="kicker">FAQ</p>
+          <h2 id="faq-title">Questions, answered.</h2>
+          <p class="section__sub">Something else? Email <a href="mailto:Fitzyracing1@gmail.com">Fitzyracing1@gmail.com</a> or reach out on X at <a href="https://x.com/fitzyracing1" rel="noopener" target="_blank">@fitzyracing1<span class="visually-hidden"> (opens in a new tab)</span></a>.</p>
+        </header>
+        <div class="faq__list">
+          <details class="qa">
+            <summary><h3>What counts as &ldquo;abandoned&rdquo;?</h3></summary>
+            <div class="qa__a">
+              <p>A package or action that&rsquo;s still widely used but hasn&rsquo;t shipped in years, while real crash reports and fix PRs sit unmerged. There&rsquo;s no magic cutoff date: what matters is a confirmed bug that hurts a lot of people and nobody left to merge the fix.</p>
+            </div>
+          </details>
+          <details class="qa">
+            <summary><h3>Will you take over my package name?</h3></summary>
+            <div class="qa__a">
+              <p>No. Forks publish under 360 Bench&rsquo;s own names: <code>@fitzyracing/*</code> on npm, <code>fitzyracing1/*</code> on GitHub (Go modules and Actions) and <code>fitzyracing-*</code> on PyPI. Your package name, repository and registry entry stay yours. The original LICENSE, author and contributors are kept and credited.</p>
+            </div>
+          </details>
+          <details class="qa">
+            <summary><h3>What if the original project comes back?</h3></summary>
+            <div class="qa__a">
+              <p>Upstream first. If a maintainer comes back and ships the fix, the fork points people home, back to the original. 360 Bench is happy to hand the work back.</p>
+            </div>
+          </details>
+          <details class="qa">
+            <summary><h3>How does equity or a partnership work?</h3></summary>
+            <div class="qa__a">
+              <p>Case by case. There are no fixed terms and no standard numbers. Some maintainers just want the bug fixed; some want maintainership back after the revival; some are open to talking about sponsorship, paid support, or an equity position in exchange for reviving the project.</p>
+              <p>Whatever the shape, any equity or partnership terms are agreed project by project after a conversation. Submitting a project is not a commitment by either side.</p>
+            </div>
+          </details>
+          <details class="qa">
+            <summary><h3>What does it cost?</h3></summary>
+            <div class="qa__a">
+              <p>Nothing. The fixes are free and open source. Every fork keeps the original project&rsquo;s license, and this index is MIT.</p>
+            </div>
+          </details>
+          <details class="qa">
+            <summary><h3>Do I have to change my code?</h3></summary>
+            <div class="qa__a">
+              <p>No. The API stays the same. On npm you can swap the fork in everywhere in your dependency tree with <code>overrides</code>; in Go, a <code>replace</code> line in <code>go.mod</code>; for Actions, change only the <code>uses:</code> line; on PyPI the import name is unchanged (uninstall the original first, then install the fork). Each project card has the exact snippet.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__grid">
+      <div class="site-footer__brand">
+        <p class="brand brand--footer">
+          <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="20" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="3 3.28"/>
+            <path d="M32 6a26 26 0 1 1-24.3 16.8" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="32" cy="32" r="6" fill="var(--accent)"/>
+          </svg>
+          <span class="brand__name">360&nbsp;Bench</span>
+        </p>
+        <p class="muted">Fixes for abandoned packages: npm, Go, GitHub Actions and PyPI. By Joshua Almeida.</p>
+      </div>
+      <nav class="site-footer__links" aria-label="Contact and links">
+        <ul>
+          <li><a href="https://github.com/fitzyracing1/360-bench" rel="noopener" target="_blank">GitHub<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          <li><a href="https://x.com/fitzyracing1" rel="noopener" target="_blank">X @fitzyracing1<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          <li><a href="mailto:Fitzyracing1@gmail.com">Fitzyracing1@gmail.com</a></li>
+        </ul>
+      </nav>
+      <div class="site-footer__legal">
+        <p>Licenses stay with the original projects: MIT (fast-deep-equal, progress, cron, pydub, fs), BSD-3-Clause (react-transition-group) and Apache-2.0 (the two actions). Original projects and their names belong to their authors. This index is MIT.</p>
+        <p class="muted">No cookies, no trackers, no backend.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="projects.js"></script>
+  <script src="render.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

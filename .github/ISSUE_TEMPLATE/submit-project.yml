@@ -1,0 +1,109 @@
+name: Submit an abandoned project
+description: Ask 360 Bench to consider reviving a popular abandoned package or action.
+title: "360 Bench submission: "
+labels: ["submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a project. 360 Bench forks widely used, abandoned packages and actions, fixes confirmed bugs with a test that fails on the original, and republishes them as drop-in replacements under fitzyracing names. Original authors are credited and licenses are kept.
+
+        **This issue is public.** Don't include anything you don't want everyone to see. To submit privately, email Fitzyracing1@gmail.com instead.
+
+        **No fixed terms.** Any equity or partnership terms are agreed project by project, after a conversation. Submitting is not a commitment by either side.
+  - type: input
+    id: name
+    attributes:
+      label: Your name
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Your role
+      options:
+        - Original maintainer
+        - Co-maintainer
+        - User or company depending on it
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: Contact email (optional, public)
+      description: Only fill this in if you're happy for it to be public. 360 Bench can also reply here on GitHub.
+    validations:
+      required: false
+  - type: input
+    id: project
+    attributes:
+      label: Project name
+      placeholder: e.g. left-pad
+    validations:
+      required: true
+  - type: input
+    id: repo
+    attributes:
+      label: Repository URL
+      placeholder: https://github.com/owner/repo
+    validations:
+      required: true
+  - type: input
+    id: registry
+    attributes:
+      label: Package registry link (optional)
+      placeholder: https://www.npmjs.com/package/… or https://pypi.org/project/…
+    validations:
+      required: false
+  - type: dropdown
+    id: ecosystem
+    attributes:
+      label: Ecosystem
+      options:
+        - npm
+        - PyPI
+        - Go
+        - GitHub Actions
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: broken
+    attributes:
+      label: What's broken, or why is it abandoned?
+      description: The crash or error, links to upstream issues or unmerged PRs, when it last shipped.
+    validations:
+      required: true
+  - type: textarea
+    id: dependents
+    attributes:
+      label: Who depends on it? (optional)
+      description: Weekly downloads, dependent repos, notable packages or companies that use it. Rough numbers are fine.
+    validations:
+      required: false
+  - type: checkboxes
+    id: partnership
+    attributes:
+      label: Interested in a partnership? (optional, pick any)
+      description: Any equity or partnership terms are agreed project by project, after a conversation. Submitting is not a commitment by either side.
+      options:
+        - label: "(a) Just fix it, no strings"
+        - label: "(b) Transfer or share maintainership back after revival"
+        - label: "(c) Open to discussing an equity position in exchange for 360 Bench reviving the project"
+        - label: "(d) Sponsorship / paid support"
+        - label: "(e) Something else (describe below)"
+  - type: textarea
+    id: partnership_other
+    attributes:
+      label: Something else? (optional)
+      description: If you ticked (e), describe what you have in mind.
+    validations:
+      required: false
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Consent
+      options:
+        - label: I agree that 360 Bench may contact me about this submission, I understand that submitting is not a commitment by either side, and I understand this issue is public.
+          required: true
