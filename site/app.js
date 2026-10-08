@@ -278,7 +278,7 @@
 
   function buildIssueUrl(d) {
     return ISSUE_BASE + "?title=" + encodeURIComponent(subjectFor(d)) +
-      "&body=" + encodeURIComponent(buildIssueBody(d)) + "&labels=submission";
+      "&body=" + encodeURIComponent(buildIssueBody(d));
   }
 
   function showResult(via, d, url) {
