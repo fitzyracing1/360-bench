@@ -109,6 +109,30 @@ var BENCH_DATA = {
       ]
     },
     {
+      id: "fetch-event-source",
+      ecosystem: "npm",
+      name: "@fitzyracing/fetch-event-source",
+      version: "2.0.2",
+      replaces: "@microsoft/fetch-event-source",
+      upstreamUrl: "https://github.com/Azure/fetch-event-source",
+      upstreamLastRelease: "2.0.1, Apr 2021",
+      upstreamUsage: "~3.6M/week",
+      license: "MIT",
+      repoUrl: "https://github.com/fitzyracing1/fetch-event-source",
+      registryUrl: "https://www.npmjs.com/package/@fitzyracing/fetch-event-source",
+      fixed: "No more `ReferenceError: document is not defined` or `window is not defined` in Node.js (also Bun and web workers): `document` is only used when it exists, and `fetch` and the retry timers fall back to `globalThis` when there is no `window`. Nothing changes in the browser: the same `visibilitychange` handling, parser, retries, callbacks and types.",
+      note: "If you also depend on it directly, npm requires the override to match: do the aliased install first, then use `\"$@microsoft/fetch-event-source\"` as the override value.",
+      noteUrl: "https://github.com/fitzyracing1/fetch-event-source#using-it-as-a-drop-in-replacement",
+      issues: [
+        { label: "#39", url: "https://github.com/Azure/fetch-event-source/issues/39" },
+        { label: "#20", url: "https://github.com/Azure/fetch-event-source/issues/20" }
+      ],
+      snippets: [
+        { label: "Install under the old name", lang: "sh", code: "npm i @microsoft/fetch-event-source@npm:@fitzyracing/fetch-event-source@^2.0.2" },
+        { label: "package.json overrides", lang: "json", code: "\"overrides\": {\n  \"@microsoft/fetch-event-source\": \"npm:@fitzyracing/fetch-event-source@^2.0.2\"\n}" }
+      ]
+    },
+    {
       id: "cron",
       ecosystem: "go",
       name: "github.com/fitzyracing1/cron/v3",
@@ -219,6 +243,99 @@ var BENCH_DATA = {
       snippets: [
         { label: "pip (uninstall first)", lang: "sh", code: "pip uninstall -y fs && pip install fitzyracing-fs" },
         { label: "uv override", lang: "toml", code: "[project]\ndependencies = [\"fitzyracing-fs\", \"...the package that depends on fs...\"]\n\n[tool.uv]\noverride-dependencies = [\"fs; sys_platform == 'never'\"]" }
+      ]
+    },
+    {
+      id: "rank-bm25",
+      ecosystem: "pypi",
+      name: "fitzyracing-rank-bm25",
+      importName: "rank_bm25",
+      version: "0.2.3",
+      replaces: "rank-bm25",
+      upstreamUrl: "https://github.com/dorianbrown/rank_bm25",
+      upstreamLastRelease: "0.2.2, Feb 2022",
+      upstreamUsage: "~8.7M/month",
+      license: "Apache-2.0",
+      repoUrl: "https://github.com/fitzyracing1/rank_bm25",
+      registryUrl: "https://pypi.org/project/fitzyracing-rank-bm25/",
+      fixed: "`BM25Okapi([])` (and `BM25L`, `BM25Plus`) raises a clear `EmptyCorpusException` instead of `ZeroDivisionError: division by zero`; it still subclasses `ZeroDivisionError`. `BM25Okapi` no longer gives a term in exactly half the documents an idf of 0 (so matching documents scored 0): it gets the same `epsilon * average_idf` floor as more common terms. That is the only score change, and no score goes down. The sdist builds again under PEP 517. Python 3.8+.",
+      issues: [
+        { label: "#36", url: "https://github.com/dorianbrown/rank_bm25/issues/36" },
+        { label: "#39", url: "https://github.com/dorianbrown/rank_bm25/issues/39" },
+        { label: "#43", url: "https://github.com/dorianbrown/rank_bm25/issues/43" },
+        { label: "#56", url: "https://github.com/dorianbrown/rank_bm25/issues/56" }
+      ],
+      snippets: [
+        { label: "pip (uninstall first)", lang: "sh", code: "pip uninstall -y rank-bm25 && pip install fitzyracing-rank-bm25" },
+        { label: "uv override", lang: "toml", code: "[project]\ndependencies = [\"fitzyracing-rank-bm25\", \"...the package that depends on rank-bm25...\"]\n\n[tool.uv]\noverride-dependencies = [\"rank-bm25; sys_platform == 'never'\"]" }
+      ]
+    },
+    {
+      id: "bert-score",
+      ecosystem: "pypi",
+      name: "fitzyracing-bert-score",
+      importName: "bert_score",
+      version: "0.3.14",
+      replaces: "bert-score",
+      upstreamUrl: "https://github.com/Tiiiger/bert_score",
+      upstreamLastRelease: "0.3.13, Feb 2023",
+      upstreamUsage: "~420k/month",
+      license: "MIT",
+      repoUrl: "https://github.com/fitzyracing1/bert_score",
+      registryUrl: "https://pypi.org/project/fitzyracing-bert-score/",
+      fixed: "No more `OverflowError: int too big to convert` with DeBERTa-v3 (including `microsoft/deberta-xlarge-mnli`) and other models whose tokenizer declares no maximum length, with fast tokenizers on transformers 4 and every time on transformers 5. These inputs are encoded without truncation, as the slow tokenizers did, so you get the same scores 0.3.13 gave with its default slow tokenizer on transformers 4. Also fixes `evaluate`'s `bertscore` metric.",
+      issues: [
+        { label: "#205", url: "https://github.com/Tiiiger/bert_score/issues/205" },
+        { label: "huggingface/evaluate#739", url: "https://github.com/huggingface/evaluate/issues/739" }
+      ],
+      snippets: [
+        { label: "pip (uninstall first)", lang: "sh", code: "pip uninstall -y bert-score && pip install fitzyracing-bert-score" },
+        { label: "uv override", lang: "toml", code: "[project]\ndependencies = [\"fitzyracing-bert-score\", \"...the package that depends on bert-score...\"]\n\n[tool.uv]\noverride-dependencies = [\"bert-score; sys_platform == 'never'\"]" }
+      ]
+    },
+    {
+      id: "rouge",
+      ecosystem: "pypi",
+      name: "fitzyracing-rouge",
+      importName: "rouge",
+      version: "1.0.2",
+      replaces: "rouge",
+      upstreamUrl: "https://github.com/pltrdy/rouge",
+      upstreamLastRelease: "1.0.1, Jul 2021",
+      upstreamUsage: "~640k/month",
+      license: "Apache-2.0",
+      repoUrl: "https://github.com/fitzyracing1/rouge",
+      registryUrl: "https://pypi.org/project/fitzyracing-rouge/",
+      fixed: "Unrelated texts no longer share a phantom empty word: whitespace-only sentence segments (the `\" \"` in `\"cat. \"`) were counted as an empty `\"\"` word, so `\"the cat. . dog\"` vs `\"a bird. . fish\"` scored rouge-1 f=0.25 instead of 0. All other inputs score exactly as in 1.0.1. ROUGE-L no longer hits `RecursionError` on long sentences (upstream PR #69, merged but never released).",
+      issues: [
+        { label: "#77", url: "https://github.com/pltrdy/rouge/issues/77" },
+        { label: "#69", url: "https://github.com/pltrdy/rouge/pull/69" }
+      ],
+      snippets: [
+        { label: "pip (uninstall first)", lang: "sh", code: "pip uninstall -y rouge && pip install fitzyracing-rouge" },
+        { label: "uv override", lang: "toml", code: "[project]\ndependencies = [\"fitzyracing-rouge\", \"...the package that depends on rouge...\"]\n\n[tool.uv]\noverride-dependencies = [\"rouge; sys_platform == 'never'\"]" }
+      ]
+    },
+    {
+      id: "transformers-stream-generator",
+      ecosystem: "pypi",
+      name: "fitzyracing-transformers-stream-generator",
+      importName: "transformers_stream_generator",
+      version: "0.0.6",
+      replaces: "transformers-stream-generator",
+      upstreamUrl: "https://github.com/LowinLi/transformers-stream-generator",
+      upstreamLastRelease: "0.0.5, Mar 2024",
+      upstreamUsage: "~360k/month",
+      license: "MIT",
+      repoUrl: "https://github.com/fitzyracing1/transformers-stream-generator",
+      registryUrl: "https://pypi.org/project/fitzyracing-transformers-stream-generator/",
+      fixed: "Works on transformers 4.41+ and 5.x: no more `ImportError: cannot import name 'BeamSearchScorer'` (4.57) / `'DisjunctiveConstraint'` (5.x) on import, and `init_stream_support()` no longer breaks every `model.generate()` call on 4.41 to 4.56. `do_stream=True` streams through transformers' public `generate(streamer=...)`; beam search with streaming raises a clear `ValueError`. On transformers 4.26 to 4.40 the 0.0.5 code runs unchanged.",
+      issues: [
+        { label: "#15", url: "https://github.com/LowinLi/transformers-stream-generator/issues/15" }
+      ],
+      snippets: [
+        { label: "pip (uninstall first)", lang: "sh", code: "pip uninstall -y transformers-stream-generator && pip install fitzyracing-transformers-stream-generator" },
+        { label: "uv override", lang: "toml", code: "[project]\ndependencies = [\"fitzyracing-transformers-stream-generator\", \"...the package that depends on transformers-stream-generator...\"]\n\n[tool.uv]\noverride-dependencies = [\"transformers-stream-generator; sys_platform == 'never'\"]" }
       ]
     }
   ]
