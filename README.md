@@ -126,3 +126,8 @@ Know a widely used package or action that's abandoned and still crashing? [Submi
 ## License
 
 The forks keep their original licenses: MIT (fast-deep-equal, progress, cron, pydub, fs), BSD-3-Clause (react-transition-group) and Apache-2.0 (the two actions). This index is MIT.
+
+## Documentation
+
+- In-repo docs: [docs/](docs/index.md)
+- Wiki: [https://github.com/fitzyracing1/360-bench/wiki](https://github.com/fitzyracing1/360-bench/wiki)
